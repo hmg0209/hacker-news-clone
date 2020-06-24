@@ -1,20 +1,17 @@
 <template>
   <div>
-    <p>name: {{ userInfo.id }}</p>
-    <p>karma: {{ userInfo.karma }}</p>
-    <p>created: {{ userInfo.created }}</p>
-    <p>about: {{ userInfo.about }}</p>
+    <p>name: {{ fetchedUserInfo.id }}</p>
+    <p>karma: {{ fetchedUserInfo.karma }}</p>
+    <p>created: {{ fetchedUserInfo.created }}</p>
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    userInfo() {
-      return this.$store.state.user;
-    }
+    ...mapGetters(['fetchedUserInfo']),
   },
   created() {
     const userName = this.$route.params.user;

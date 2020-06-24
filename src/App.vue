@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view />
+    <transition name="page">
+      <router-view/>
+    </transition>
   </div>
 </template>
 
@@ -16,4 +18,15 @@ export default {
 </script>
 
 <style lang="scss">
+.page {
+  &-enter,
+  &-leave-to {
+    opacity: 0;
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition: opacity .5s;
+  }
+}
 </style>
