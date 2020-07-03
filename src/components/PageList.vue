@@ -1,32 +1,31 @@
 <template>
-  <ul class="board">
+  <ul class="board l-wrap">
     <li class="board__item"
       v-for="(item, index) in listItems"
       v-bind:key="index">
       <span class="board__head">{{ item.points || 0 }}</span>
-
-      <div class="borad__body">
-        <p>
+      <div class="board__body">
+        <p class="board__title">
           <template v-if="item.domain">
-            <a :href="item.url" target="_blank">
+            <a class="link" :href="item.url" target="_blank">
               {{ item.title }}
             </a>
           </template>
           <template v-else>
-            <router-link :to="`askItem/${item.id}`">
+            <router-link class="link" :to="`askItem/${item.id}`">
               {{ item.title }}
             </router-link>
           </template>
         </p>
-        <small>
+        <div class="board__desc">
           {{ item.time_ago }}
           <template v-if="item.user">
-            by <router-link :to="`/user/${item.user}`">{{ item.user }}</router-link>
+            by <router-link class="link" :to="`/user/${item.user}`">{{ item.user }}</router-link>
           </template>
           <template v-else>
-            <a :href="item.url">{{ item.domain }}</a>
+            <a class="link" :href="item.url" target="_blank">{{ item.domain }}</a>
           </template>
-        </small>
+        </div>
       </div>
     </li>
   </ul>
@@ -83,7 +82,43 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import './src/assets/scss/_variable.scss';
+
   .board {
-    &__item {}
+    &__item {
+      display: flex;
+      align-items: center;
+      box-sizing: border-box;
+      padding: 1rem 0 1.2rem;
+      border: 1px solid $main-light;
+      border-left-width: 10px;
+      border-radius: 0 5px 5px 0;
+
+      & + & {
+        margin-top: 1rem;
+      }
+    }
+
+    &__head {
+      width: 10%;
+      max-width: 70px;
+      color: $main;
+      font-size: 1.4rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    &__body {
+      max-width: 90%;
+    }
+
+    &__title {
+      font-weight: bold;
+    }
+
+    &__desc {
+      color: $gray-light;
+      font-size: 1.4rem;
+    }
   }
 </style>
