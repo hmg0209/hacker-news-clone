@@ -7,12 +7,12 @@
       <div class="board__body">
         <p class="board__title">
           <template v-if="item.domain">
-            <a class="link" :href="item.url" target="_blank">
+            <a class="link link--bold" :href="item.url" target="_blank">
               {{ item.title }}
             </a>
           </template>
           <template v-else>
-            <router-link class="link" :to="`askItem/${item.id}`">
+            <router-link class="link link--bold" :to="`askItem/${item.id}`">
               {{ item.title }}
             </router-link>
           </template>
@@ -32,51 +32,13 @@
 </template>
 
 <script>
-// import { mapGetters } from 'vuex';
 
 export default {
   computed: {
-    // ...mapGetters({ ListItems: this.getterName }),
     listItems() {
-      const { name } = this.$route;
-      let fetchedLsit;
-
-      switch (name) {
-        case 'news':
-          fetchedLsit = 'fetchedNews';
-          break;
-        case 'ask':
-          fetchedLsit = 'fetchedAsk';
-          break;
-        case 'jobs':
-          fetchedLsit = 'fetchedJobs';
-          break;
-        default:
-          break;
-      }
-
-      return this.$store.getters[fetchedLsit];
+      console.log('list: ', this.$store.state.list);
+      return this.$store.state.list;
     },
-  },
-  created() {
-    const { name } = this.$route;
-    let actionName;
-
-    switch (name) {
-      case 'news':
-        actionName = 'FETCH_NEWS';
-        break;
-      case 'ask':
-        actionName = 'FETCH_ASKS';
-        break;
-      case 'jobs':
-        actionName = 'FETCH_JOBS';
-        break;
-      default:
-        break;
-    }
-
-    this.$store.dispatch(actionName);
   },
 };
 </script>
@@ -117,7 +79,6 @@ export default {
     }
 
     &__desc {
-      color: $gray-light;
       font-size: 1.4rem;
     }
   }

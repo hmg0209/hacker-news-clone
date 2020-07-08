@@ -5,16 +5,32 @@
       <transition name="page">
           <router-view/>
       </transition>
+      <Spinner :loading="loadingStatus"></Spinner>
     </main>
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue';
+import Spinner from './components/Spinner.vue';
 
 export default {
   components: {
     Header,
+    Spinner,
+  },
+  data() {
+    return {
+      loadingStatus: false,
+    };
+  },
+  methods: {
+    startSpinner() {
+      this.loadingStatus = true;
+    },
+    endSpinner() {
+      this.loadingStatus = false;
+    },
   },
 };
 </script>
@@ -53,6 +69,12 @@ a {
 
 .link {
   position: relative;
+  color: $gray-light;
+
+  &--bold {
+    color: $gray;
+    font-weight: bold;
+  }
 
   &::before {
     position: absolute;

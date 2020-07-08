@@ -1,5 +1,7 @@
 <template>
-  <PageList/>
+  <div>
+    <PageList></PageList>
+  </div>
 </template>
 
 <script>
